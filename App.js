@@ -48,7 +48,7 @@ const DATA = [
 ];
 
 export default class App extends React.Component {
-  renderCard(item) {
+  renderCard = item => {
     return (
       <Card title={item.text} image={{ uri: item.uri }} key={item.id}>
         <Text style={{ marginBottom: 10 }}>I can customize this further</Text>
@@ -59,12 +59,27 @@ export default class App extends React.Component {
         />
       </Card>
     );
-  }
+  };
+
+  renderNoMoreCards = () => {
+    return (
+      <Card title="all Done!!">
+        <Text style={{ marginBottom: 10 }}>
+          There's no more content here 😭
+        </Text>
+        <Button backgroundColor="#03A9F4" title="Get more!" />
+      </Card>
+    );
+  };
 
   render() {
     return (
       <View style={styles.container}>
-        <Deck data={DATA} renderCard={this.renderCard} />
+        <Deck
+          data={DATA}
+          renderCard={this.renderCard}
+          renderNoMoreCards={this.renderNoMoreCards}
+        />
       </View>
     );
   }
@@ -73,6 +88,7 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
+    marginTop: 50
   }
 });
